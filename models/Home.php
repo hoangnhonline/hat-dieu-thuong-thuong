@@ -8,13 +8,11 @@ class Home {
 
 
    function __construct() {
-    if($_SERVER['SERVER_NAME']=='hatdieu.local'){
-        mysql_connect('localhost', 'root', '') or die("Can't connect to server");
-           mysql_select_db('hatdieu') or die("Can't connect database");
-    }else{
-        mysql_connect('mysql.onehost.vn', 'thietken_hoang', 'huyhoang157') or die("Can't connect to server");
-            mysql_select_db('thietken_hoang') or die("Can't connect database"); 
-    }
+  
+		mysql_connect('localhost', 'root', 'tuenhi1908') or die("Can't connect to serversss");
+
+	        mysql_select_db('hatdieu') or die("Can't connect database");	
+    
         mysql_query("SET NAMES 'utf8'") or die(mysql_error());
     }
 function getListArticles($offset,$limit){

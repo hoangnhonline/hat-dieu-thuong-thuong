@@ -86,7 +86,7 @@ ATTENTION: The trailing slash is required.
 //$baseDir = "/home/onbus/domains/onbus.vn/public_html/upload/";
 
 //$baseDir = "/home/hot1102/domains/hot1102.com/public_html/conyeuoi/upload/";
-$baseDir = "/home/thietken/public_html/hoangnh/upload/";
+$baseDir = "/home/hatdieuthuongthuong.com/public_html/upload/";
 /*
  * ### Advanced Settings
  */
