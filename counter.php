@@ -1,6 +1,6 @@
 <?php
-require_once 'backend/model/Frontend.php';
-$model = new Fontend;
+$mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
+  
 
 // ip-protection in seconds
 $counter_expire = 600;
@@ -25,21 +25,21 @@ if ($counter_connected == true)
    
    // get counter information
    $sql = "SELECT * FROM counter_values LIMIT 1";
-   $res = mysql_query($sql);
+   $res = $mysqli->query($sql);
    
    // fill when empty
-   if (mysql_num_rows($res) == 0)
+   if (mysqli_num_rows($res) == 0)
    {	  
 	  $sql = "INSERT INTO `counter_values` (`id`, `day_id`, `day_value`, `all_value`) VALUES ('1', '" . date("z") . "',  '1', '1')";
-	  mysql_query($sql);
+	  $mysqli->query($sql);
 
 	  // reload with settings
 	  $sql = "SELECT * FROM counter_values LIMIT 1";
-      $res = mysql_query($sql);
+      $res = $mysqli->query($sql);
 	  
 	  $ignore = true;
    }   
-   $row = mysql_fetch_assoc($res);
+   $row = mysqli_fetch_assoc($res);
    
    $day_id = $row['day_id'];
    $day_value = $row['day_value'];   
@@ -72,10 +72,10 @@ if ($counter_connected == true)
    {
    	$time = time();
    	$sql = "SELECT visit FROM counter_ips WHERE ip = '127.0.0.1'";
-   	$rs= mysql_query($sql);
-   	$row = mysql_fetch_assoc($rs);
+   	$rs= $mysqli->query($sql);
+   	$row = mysqli_fetch_assoc($rs);
       $sql = "DELETE FROM counter_ips WHERE $time-visit >= $counter_expire"; 
-      mysql_query($sql);	  
+      $mysqli->query($sql);	  
    }
  
    // check for entry
@@ -84,26 +84,26 @@ if ($counter_connected == true)
    	$time = time();
      
 	 	$sql = "SELECT visit FROM counter_ips WHERE ip = '$counter_ip'";
-   		$rs= mysql_query($sql);
+   		$rs= $mysqli->query($sql);
 	  
-	  if (mysql_num_rows($rs) > 0)
+	  if (mysqli_num_rows($rs) > 0)
 	  {
 	 	$sql = "update counter_ips set visit = $time where ip = '$counter_ip'";
-	 	mysql_query($sql) or die(mysql_error());	  	
+	 	$mysqli->query($sql) or die(mysql_error());	  	
 		$ignore = true;						   		 
 	  }
 	  else
 	  {
 		 // insert ip
 	     $sql = "INSERT INTO counter_ips (ip, visit) VALUES ('$counter_ip', $time)";
-   	     mysql_query($sql) or die(mysql_error()); 
+   	     $mysqli->query($sql) or die(mysql_error()); 
 	  }	  	  
    }
        
    // online?
    $sql = "SELECT * FROM counter_ips";
-   $res = mysql_query($sql);
-   $online = mysql_num_rows($res);
+   $res = $mysqli->query($sql);
+   $online = mysqli_num_rows($res);
       
    // add counter
    if ($ignore == false)
@@ -127,7 +127,7 @@ if ($counter_connected == true)
 		 
 	  // speichern und aufräumen
 	  $sql = "UPDATE counter_values SET day_id = '$day_id', day_value = '$day_value', all_value = '$all_value' WHERE id = 1";
-	  mysql_query($sql);  	  
+	  $mysqli->query($sql);  	  
    }	  
 	  	
 ?>

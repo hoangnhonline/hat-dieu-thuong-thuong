@@ -1,5 +1,5 @@
 <?php 
-$arrCate = $model->getListCategory();
+$arrCate = getListCategory();
 ?>
 <?php include "blocks/slide.php"; ?>
 <?php include "blocks/about.php"; ?>

@@ -1,10 +1,13 @@
 <?php
+//die('11233344');
 //echo "<h1>Server đang bảo trì, vui lòng quay lại sau 08:00 ngày 17-12-2016. Xin cảm ơn.</h1>";die; 
 session_start();
-//ini_set('display_errors', 0);
+//ini_set('display_errors', 1);
 require_once 'routes.php';
+
 include "counter.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -52,6 +55,7 @@ include "counter.php";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="container" id="wrappertt">
+
 	<div class="row" >
 		<?php include "blocks/banner.php";  ?>
 		<?php include "blocks/menu.php";  ?>
@@ -75,7 +79,7 @@ include "counter.php";
 				            <div class="jcarousel">
 				                <ul>
 				                	<?php 
-								  	$arrBanner = $model->getListBannerByPosition(2);
+								  	$arrBanner = getListBannerByPosition(2);
 								  	if(!empty($arrBanner)){
 								  		$j = 0 ;
 								  		foreach ($arrBanner as $value) {

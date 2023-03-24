@@ -5,7 +5,7 @@
     <div class="col-md-12 container-gallery" id="content-gioithieu" >
       <div id="gallery-1" class="royalSlider rsDefault">
       <?php 
-            $arrBanner = $model->getListBannerByPosition(3);
+            $arrBanner = getListBannerByPosition(3);
           if(!empty($arrBanner)){
             $k = 0 ;
             foreach ($arrBanner as $value) {

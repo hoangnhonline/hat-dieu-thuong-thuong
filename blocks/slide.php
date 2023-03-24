@@ -9,7 +9,7 @@
 	  <!-- Wrapper for slides -->
 	  <div class="carousel-inner" role="listbox">
 	  	<?php 
-	  	$arrBanner = $model->getListBannerByPosition(1);
+	  	$arrBanner = getListBannerByPosition(1);
 	  	if(!empty($arrBanner)){
 	  		$i = 0 ;
 	  		foreach ($arrBanner as $value) {

@@ -1,4 +1,4 @@
-<?php $arrList = $model->getListArticlesOther($article_id); ?>
+<?php $arrList = getListArticlesOther($article_id); ?>
 <div class="main-content">
 	<p class="title-content">
 		<a href="tin-tuc.html" title="Tin tuc">Tin tức</a> 

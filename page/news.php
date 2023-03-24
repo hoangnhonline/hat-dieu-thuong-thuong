@@ -1,11 +1,11 @@
 <?php
 $page_show = 5;
-$arrTotal = $model->getListArticles(-1, -1);
+$arrTotal = getListArticles(-1, -1);
 $limit = 10;
 $page = (isset($_GET['trang'])) ? (int) $_GET['trang'] : 1;
 $total_page = ceil($arrTotal['total'] / $limit);
 $offset = $limit * ($page - 1);
-$arrList = $model->getListArticles($offset, $limit);
+$arrList = getListArticles($offset, $limit);
 $link = "tin-tuc.html";
 ?>
 <div class="main-content">
@@ -39,7 +39,7 @@ $link = "tin-tuc.html";
 		<?php } ?>
 		<div class="pager-container">
 	        <div class="pager">
-	           <?php echo $model->phantrang($page,$page_show,$total_page,$link); ?> 
+	           <?php echo phantrang($page,$page_show,$total_page,$link); ?> 
 	        </div>        
 	    </div>
 

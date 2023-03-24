@@ -1,5 +1,5 @@
 <?php 
-$arrProduct = $model->getProductByCategory($cate_id);
+$arrProduct = getProductByCategory($cate_id);
 ?>
 <div class="main-content">
 	<h1 class="title-content">
