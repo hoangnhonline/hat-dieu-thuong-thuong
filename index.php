@@ -2,7 +2,7 @@
 //die('11233344');
 //echo "<h1>Server đang bảo trì, vui lòng quay lại sau 08:00 ngày 17-12-2016. Xin cảm ơn.</h1>";die; 
 session_start();
-//ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 require_once 'routes.php';
 
 include "counter.php";

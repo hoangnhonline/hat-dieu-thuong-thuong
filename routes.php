@@ -4,6 +4,7 @@ if(!isset($_SESSION)){
 }
 $mod = isset($_GET['mod']) ? $_GET['mod'] : "";
 $arrText = getListText();
+
 function getListArticles($offset,$limit){
     $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $arrReturn = array();
@@ -398,6 +399,7 @@ function getListCateType(){
 }
 /* cate_type */
 function getListCateTypeMenu(){
+    
     $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $arrReturn = array();
     $sql = "SELECT * FROM cate_type WHERE hidden = 0 AND is_menu = 1";
@@ -408,6 +410,7 @@ function getListCateTypeMenu(){
     return $arrReturn;
 }
 function getDetailCateType($id) {
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $arrReturn = array();      
     $sql = "SELECT * FROM cate_type WHERE id = $id";
     $rs = $mysqli->query($sql) or die(mysqli_error());
@@ -418,6 +421,7 @@ function getDetailCateType($id) {
 
 
 function getCateByCateType($cate_type_id) {
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $arrReturn = array();        
     $sql = "SELECT * FROM cate WHERE cate_type_id = $cate_type_id AND parent_id = 0";
     $rs = $mysqli->query($sql) or die(mysqli_error());
@@ -455,6 +459,7 @@ function getCateByCateType($cate_type_id) {
     }                
 }
 function getCateCap1ByCateType($cate_type_id) {
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $arrReturn = array();        
     $sql = "SELECT * FROM cate WHERE cate_type_id = $cate_type_id AND parent_id = 0";
     $rs = $mysqli->query($sql) or die(mysqli_error());
@@ -464,6 +469,7 @@ function getCateCap1ByCateType($cate_type_id) {
     return $arrReturn;
 }
  function getCateCap1ByCateTypeMenu($cate_type_id) {
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $arrReturn = array();        
     $sql = "SELECT * FROM cate WHERE cate_type_id = $cate_type_id AND parent_id = 0 AND is_hot = 1";
     $rs = $mysqli->query($sql) or die(mysqli_error());
@@ -550,7 +556,7 @@ function phantrang($page, $page_show, $total_page, $link) {
 
 
 function login($username,$password){
-
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $password = md5($password);
     $sql = "SELECT * FROM users WHERE username='$username' AND password ='$password'";
     $user = $mysqli->query($sql) or die(mysqli_error());
@@ -625,6 +631,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body) {
     }
 }
 function checkemailexist($email){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $sql = "SELECT id FROM newsletter WHERE email = '$email' AND status = 1 ";
     $rs = $mysqli->query($sql) or die(mysqli_error());
     $row = mysqli_num_rows($rs);
@@ -636,6 +643,7 @@ function checkemailexist($email){
 }
 
 function checkUsernameExist($username){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $sql = "SELECT user_id FROM users WHERE username = '$username' AND status = 1 and role_id = 2 ";
     $rs = $mysqli->query($sql) or die(mysqli_error());
     $row = mysqli_num_rows($rs);
@@ -646,6 +654,7 @@ function checkUsernameExist($username){
     }
 }
 function checkEmailUsed($email){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $sql = "SELECT user_id FROM users WHERE email = '$email' AND status = 1 and role_id = 2";
     $rs = $mysqli->query($sql) or die(mysqli_error());
     $row = mysqli_num_rows($rs);
@@ -656,6 +665,7 @@ function checkEmailUsed($email){
     }
 }
 function getListCity(){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $arrReturn = array();
     $sql = "SELECT * FROM city WHERE status = 1";
     $rs = $mysqli->query($sql);
@@ -665,6 +675,7 @@ function getListCity(){
     return $arrReturn;
 }
 function insertUser($username,$password,$name,$email,$fullname,$address,$city,$phone,$company,$masothue){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
      $time = time();
      $sql = "INSERT INTO users VALUES
                         (NULL,'$username','$password','$name',
@@ -673,6 +684,7 @@ function insertUser($username,$password,$name,$email,$fullname,$address,$city,$p
      $rs = $mysqli->query($sql) or die(mysqli_error().$sql);
 }
 function getDetailUser($user_id){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $sql = "SELECT user_id,username,fullname,display_name,city_id,company,tax_no,phone,email,address,last_login FROM users WHERE user_id = $user_id";
     $rs = $mysqli->query($sql);
     $row = mysqli_fetch_assoc($rs);
@@ -681,6 +693,7 @@ function getDetailUser($user_id){
 /* order */
 
 function insertOrder($total_amount,$total_price,$fullname,$phone,$email,$address,$city_id,$company,$tax_no,$method_id,$note,$discount,$code_id,$total_pay,$customer_id){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $time = time();
     $sql = "INSERT INTO orders VALUES(NULL, $total_amount,$total_price,'$fullname','$phone','$email','$address',$city_id,'$company','$tax_no',1,$time,
         $method_id,'$note','$discount',$code_id,$total_pay,$customer_id)";
@@ -689,6 +702,7 @@ function insertOrder($total_amount,$total_price,$fullname,$phone,$email,$address
     return $order_id;
 }
 function getListProductCate($parent_id=-1,$cate_id=-1,$giatu=-1,$giaden=-1,$age_range=-1,$hot=-1,$is_saleoff=-1,$is_new=-1,$offset = -1, $limit = -1) {
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     try{
         $arrResult = array();
         $sql = "SELECT * FROM product WHERE (parent_cate = $parent_id OR $parent_id = -1) ";
@@ -716,12 +730,14 @@ function getListProductCate($parent_id=-1,$cate_id=-1,$giatu=-1,$giaden=-1,$age_
     }
 }
 function getDetailArticles($article_id){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $sql = "SELECT * FROM articles WHERE article_id = $article_id";
     $rs = $mysqli->query($sql);
     $row = mysqli_fetch_assoc($rs);
     return $row;
 }
 function getArticlesRelated($cate_id, $article_id,$offset,$limit){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $arrReturn = array();
     $sql = "SELECT article_id,article_title,article_alias,image_url FROM articles WHERE cate_id = $cate_id AND article_id <> $article_id ORDER BY article_id DESC LIMIT $offset,$limit";
     $rs = $mysqli->query($sql);
@@ -731,6 +747,7 @@ function getArticlesRelated($cate_id, $article_id,$offset,$limit){
     return $arrReturn;
 }
 function getArticlesMostView($offset,$limit){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $arrReturn = array();
     $sql = "SELECT article_id,article_title,article_alias,image_url FROM articles WHERE status = 1 ORDER BY RAND() LIMIT $offset,$limit";
     $rs = $mysqli->query($sql);
@@ -740,6 +757,7 @@ function getArticlesMostView($offset,$limit){
     return $arrReturn;
 }
 function getProductDeal($offset,$limit){
+    $mysqli = new mysqli("localhost","root","matkhaunhucu789","hatdieu");
     $arrReturn = array();
     $sql = "SELECT id,product_name,product_alias,image_url,price,price_old FROM product WHERE status = 1 AND is_deal = 1 ORDER BY RAND() LIMIT $offset,$limit";
     $rs = $mysqli->query($sql);
